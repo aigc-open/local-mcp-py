@@ -6,7 +6,7 @@
 
 - **代码辅助工具**: 提供代码审查、代码解释、调试帮助等功能
 - **MCP 协议支持**: 基于标准的 Model Context Protocol
-- **命令行支持**: 提供简单易用的命令行接口
+- **Fire 命令行接口**: 使用 Python Fire 提供灵活的命令行接口
 - **易于扩展**: 模块化设计，便于添加新功能
 
 ## 📦 安装
@@ -15,7 +15,7 @@
 
 ```bash
 # 克隆项目
-git clone https://github.com/yourusername/local-mcp-py.git
+git clone https://github.com/aigc-open/local-mcp-py.git
 cd local-mcp-py
 
 # 安装依赖并构建
@@ -44,26 +44,40 @@ pip install -e .
 
 ### 命令行工具
 
-安装后，你将获得以下命令：
+项目使用 Python Fire 提供命令行接口，支持以下使用方式：
 
 ```bash
-# 主要命令
-local-mcp           # 启动 MCP 服务器
-local-mcp-code      # 启动代码辅助工具服务器
+# 启动主 MCP 服务器
+python -m mcps.cli main
+
+# 启动代码辅助工具服务器
+python -m mcps.cli code_helper
+
+# 查看所有可用命令
+python -m mcps.cli --help
 ```
 
 ### 编程方式使用
 
 ```python
-from mcps.cli import run
-from mcps.code_helper import code_helper_mcp
+from mcps.cli import MCP
 
 # 方式1: 使用主服务器
-mcp = run()
-mcp.run(transport='stdio')
+mcp_instance = MCP.main()
 
 # 方式2: 使用代码辅助服务器
-mcp = code_helper_mcp()
+mcp_instance = MCP.code_helper()
+```
+
+### 直接使用模块
+
+```python
+from mcp.server.fastmcp import FastMCP
+from mcps.code_helper import register_code_helper_tools
+
+# 创建自定义 MCP 服务器
+mcp = FastMCP()
+register_code_helper_tools(mcp)
 mcp.run(transport='stdio')
 ```
 
@@ -91,7 +105,7 @@ debug_prompt = debug_help_prompt(
 local-mcp-py/
 ├── mcps/                    # 主包
 │   ├── __init__.py         # 包初始化
-│   ├── cli.py              # 命令行接口
+│   ├── cli.py              # Fire 命令行接口
 │   ├── code_helper.py      # 代码辅助工具
 │   └── operator.py         # 操作工具（待开发）
 ├── setup.py                # 传统打包配置
@@ -121,8 +135,8 @@ python -m twine check dist/*
 1. 在 `mcps/` 目录创建新的模块文件
 2. 实现 `register_xxx_tools(mcp)` 函数
 3. 在模块中添加 MCP 工具装饰器 `@mcp.tool()`
-4. 在 `mcps/cli.py` 中添加对应的命令行入口
-5. 更新 `setup.py` 或 `pyproject.toml` 中的入口点
+4. 在 `mcps/cli.py` 的 `MCP` 类中添加对应的方法
+5. 使用 Fire 自动生成命令行接口
 
 ### 开发示例
 
@@ -138,21 +152,41 @@ def register_your_tools(mcp: FastMCP):
         """工具描述"""
         return f"处理结果: {param}"
 
-def your_module_mcp():
-    """创建独立的MCP服务器"""
-    mcp = FastMCP()
-    register_your_tools(mcp)
-    return mcp
+# 在 mcps/cli.py 中添加方法
+class MCP:
+    @staticmethod
+    def your_module():
+        """启动你的模块服务器"""
+        mcp = FastMCP()
+        register_your_tools(mcp)
+        mcp.run(transport='stdio')
+        return mcp
+```
+
+### 本地开发和测试
+
+```bash
+# 直接运行 CLI
+python mcps/cli.py main
+python mcps/cli.py code_helper
+
+# 使用 Fire 查看帮助
+python mcps/cli.py --help
+python mcps/cli.py main --help
 ```
 
 ## 📋 依赖
 
 - Python >= 3.8
 - mcp >= 1.0.0
+- fire >= 0.7.0
 
-## 📄 许可证
+## 🌟 项目信息
 
-MIT License
+- **作者**: AIGC-Open
+- **邮箱**: aigc-open@gmail.com
+- **仓库**: https://github.com/aigc-open/local-mcp-py
+- **许可证**: MIT License
 
 ## 🤝 贡献
 
@@ -160,4 +194,4 @@ MIT License
 
 ## 📞 支持
 
-如有问题，请在 GitHub 上创建 Issue。
+如有问题，请在 [GitHub](https://github.com/aigc-open/local-mcp-py/issues) 上创建 Issue。

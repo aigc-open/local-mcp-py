@@ -9,10 +9,10 @@ description = "A modular MCP (Model Context Protocol) server with various tools"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "Your Name", email = "your.email@example.com"}
+    {name = "AIGC-Open", email = "aigc-open@gmail.com"}
 ]
 maintainers = [
-    {name = "Your Name", email = "your.email@example.com"}
+    {name = "AIGC-Open", email = "aigc-open@gmail.com"}
 ]
 keywords = ["mcp", "model-context-protocol", "ai", "tools", "server"]
 classifiers = [
@@ -32,6 +32,7 @@ classifiers = [
 requires-python = ">=3.8"
 dependencies = [
     "mcp>=1.0.0",
+    "fire>=0.7.0",
 ]
 
 [project.optional-dependencies]
@@ -46,10 +47,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/local-mcp-py"
-Repository = "https://github.com/yourusername/local-mcp-py.git"
-Issues = "https://github.com/yourusername/local-mcp-py/issues"
-Documentation = "https://github.com/yourusername/local-mcp-py#readme"
+Homepage = "https://github.com/aigc-open/local-mcp-py"
+Repository = "https://github.com/aigc-open/local-mcp-py.git"
+Issues = "https://github.com/aigc-open/local-mcp-py/issues"
+Documentation = "https://github.com/aigc-open/local-mcp-py#readme"
 
 [project.scripts]
 # 主命令 - 完整服务器
