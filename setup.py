@@ -8,12 +8,12 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="local-mcp-py",
     version="0.1.0",
-    author="Your Name",
-    author_email="your.email@example.com",
+    author="AIGC-Open",
+    author_email="aigc-open@gmail.com",
     description="A modular MCP (Model Context Protocol) server with various tools",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/local-mcp-py",
+    url="https://github.com/aigc-open/local-mcp-py",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -30,14 +30,9 @@ setup(
     python_requires=">=3.8",
     install_requires=[
         "mcp>=1.0.0",
+        "fire>=0.7.0",
     ],
-    entry_points={
-        "console_scripts": [
-            # 主命令 - 完整服务器
-            "local-mcp=mcps.cli:run",
-            "local-mcp-code=mcps.code_helper:code_helper_mcp",
-        ],
-    },
+    entry_points={},
     extras_require={
         "dev": [
             "pytest>=6.0",

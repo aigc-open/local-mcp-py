@@ -44,13 +44,3 @@ def register_code_helper_tools(mcp: FastMCP):
 4. 给出预防类似问题的建议
 
 请提供详细的调试步骤和解决方案。"""
-
-def code_helper_mcp():
-    """创建独立的代码辅助MCP服务器"""
-    mcp = FastMCP()
-    register_code_helper_tools(mcp)
-    return mcp
-
-if __name__ == "__main__":
-    mcp = code_helper_mcp()
-    mcp.run(transport='stdio') 

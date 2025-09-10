@@ -6,13 +6,24 @@ import argparse
 from mcp.server.fastmcp import FastMCP
 from .code_helper import register_code_helper_tools
 
+class MCP:
+    """MCP服务器"""
+    
+    @staticmethod
+    def main():
+        mcp = FastMCP()
+        register_code_helper_tools(mcp)
+        mcp.run(transport='stdio')
+        return mcp
 
-def run():
-    """创建包含所有工具的完整MCP服务器"""
-    mcp = FastMCP()
-    register_code_helper_tools(mcp)
-    return mcp
+    @staticmethod
+    def code_helper():
+        mcp = FastMCP()
+        register_code_helper_tools(mcp)
+        mcp.run(transport='stdio')
+        return mcp
 
 
 if __name__ == "__main__":
-    run() 
+    from fire import Fire
+    Fire(MCP)
