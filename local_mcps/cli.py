@@ -1,6 +1,7 @@
 # local_mcps/cli.py
 """命令行接口模块 - 提供各种MCP服务器启动命令"""
 
+import json
 import sys
 import argparse
 from typing import Literal
@@ -18,6 +19,18 @@ class MCP:
         register_operator_helper_tools(mcp)
         mcp.run(transport=transport)
         return mcp
+    
+    @staticmethod
+    def init_cursor_mcp():
+        with open("~/.cursor/mcp.json", "w") as f:
+            f.write(json.dumps({
+                "mcpServers": [
+                    {
+                        "name": "code_helper",
+                        "url": "http://localhost:8000/code_helper"
+                    }
+                ]
+            }))
 
     @staticmethod
     def code_helper(transport: Literal['stdio', 'sse', 'streamable-http'] = 'stdio'):

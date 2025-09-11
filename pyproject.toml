@@ -54,16 +54,19 @@ Documentation = "https://github.com/aigc-open/local-mcp-py#readme"
 
 [project.scripts]
 # 主命令 - 完整服务器
-local-mcp = "mcps.cli:run"
+local-mcp = "local_mcps.cli:main"
 
 # 代码辅助工具
-local-mcp-code = "mcps.code_helper:code_helper_mcp"
+local-mcp-code = "local_mcps.cli:code_helper"
+
+# 算子辅助工具
+local-mcp-operator = "local_mcps.cli:operator_helper"
 
 [tool.setuptools.packages.find]
-include = ["mcps*"]
+include = ["local_mcps*"]
 
 [tool.setuptools.package-data]
-mcps = ["*.py"]
+local_mcps = ["*.py"]
 
 [tool.black]
 line-length = 88

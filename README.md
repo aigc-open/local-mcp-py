@@ -163,17 +163,6 @@ class MCP:
         return mcp
 ```
 
-### 本地开发和测试
-
-```bash
-# 直接运行 CLI
-python local_mcps/cli.py main
-python local_mcps/cli.py code_helper
-
-# 使用 Fire 查看帮助
-python local_mcps/cli.py --help
-python local_mcps/cli.py main --help
-```
 
 ## 📋 依赖
 
