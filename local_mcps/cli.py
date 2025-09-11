@@ -8,6 +8,11 @@ from typing import Literal
 from mcp.server.fastmcp import FastMCP
 from .code_helper import register_code_helper_tools
 from .operator_helper import register_operator_helper_tools
+from .tech_solution_helper import register_tech_solution_helper_tools
+from .draw_helper import register_draw_helper_tools
+from .blog_helper import register_blog_helper_tools
+from .ppt_helper import register_ppt_helper_tools
+from .tender_helper import register_tender_helper_tools
 
 class MCP:
     """MCP服务器"""
@@ -17,6 +22,11 @@ class MCP:
         mcp = FastMCP()
         register_code_helper_tools(mcp)
         register_operator_helper_tools(mcp)
+        register_draw_helper_tools(mcp)
+        register_blog_helper_tools(mcp)
+        register_ppt_helper_tools(mcp)
+        register_tech_solution_helper_tools(mcp)
+        register_tender_helper_tools(mcp)
         mcp.run(transport=transport)
         return mcp
     
@@ -63,6 +73,41 @@ class MCP:
     def operator_helper(transport: Literal['stdio', 'sse', 'streamable-http'] = 'stdio'):
         mcp = FastMCP()
         register_operator_helper_tools(mcp)
+        mcp.run(transport=transport)
+        return mcp
+    
+    @staticmethod
+    def tech_solution_helper(transport: Literal['stdio', 'sse', 'streamable-http'] = 'stdio'):
+        mcp = FastMCP()
+        register_tech_solution_helper_tools(mcp)
+        mcp.run(transport=transport)
+        return mcp
+    
+    @staticmethod
+    def draw_helper(transport: Literal['stdio', 'sse', 'streamable-http'] = 'stdio'):
+        mcp = FastMCP()
+        register_draw_helper_tools(mcp)
+        mcp.run(transport=transport)
+        return mcp
+    
+    @staticmethod
+    def blog_helper(transport: Literal['stdio', 'sse', 'streamable-http'] = 'stdio'):
+        mcp = FastMCP()
+        register_blog_helper_tools(mcp)
+        mcp.run(transport=transport)
+        return mcp
+    
+    @staticmethod
+    def ppt_helper(transport: Literal['stdio', 'sse', 'streamable-http'] = 'stdio'):
+        mcp = FastMCP()
+        register_ppt_helper_tools(mcp)
+        mcp.run(transport=transport)
+        return mcp
+    
+    @staticmethod
+    def tender_helper(transport: Literal['stdio', 'sse', 'streamable-http'] = 'stdio'):
+        mcp = FastMCP()
+        register_tender_helper_tools(mcp)
         mcp.run(transport=transport)
         return mcp
 

@@ -283,6 +283,28 @@ _operator_visualization_prompt = """
 ```
 """
 
+_write_operator_technical_blog_prompt = """
+你是一个算子开发专家，请根据给出代码的语义与计算逻辑，撰写一篇算子技术博客
+## 撰写要求：
+- 你精通算子开发，熟悉算子计算过程
+- 你知道 cpu 的计算逻辑
+- 你熟悉 cuda 相关的编程逻辑
+- 请你根据给出代码的语义与计算逻辑，撰写一篇算子技术博客
+- 最后生成一个 xxx.md 文件,命名规范为 算子名称_算子技术博客.md
+
+## 大纲要求
+- 算子定义概述
+- 算子的数据公式
+- 算子的参数说明
+- 算子计算过程
+- 核心算法流程
+- 性能优化策略
+- 该算子的应用场景
+- 代码实现
+- 等等
+"""
+
+
 
 def register_operator_helper_tools(mcp: FastMCP):
     """注册算子相关工具"""
@@ -291,3 +313,9 @@ def register_operator_helper_tools(mcp: FastMCP):
     def operator_visualization_prompt() -> str:
         """绘制算子计算过程可视化图的提示词"""
         return _operator_visualization_prompt
+    
+    
+    @mcp.tool()
+    def write_operator_technical_blog_prompt(code: str) -> str:
+        """撰写cpu/gpu算子技术博客的提示词"""
+        return _write_operator_technical_blog_prompt
