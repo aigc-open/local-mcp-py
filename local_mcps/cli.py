@@ -22,15 +22,35 @@ class MCP:
     
     @staticmethod
     def init_cursor_mcp():
-        with open("~/.cursor/mcp.json", "w") as f:
-            f.write(json.dumps({
-                "mcpServers": [
-                    {
-                        "name": "code_helper",
-                        "url": "http://localhost:8000/code_helper"
-                    }
-                ]
-            }))
+        import os
+
+        cursor_dir = os.path.expanduser("~/.cursor")
+        os.makedirs(cursor_dir, exist_ok=True)
+        mcp_json_path = os.path.join(cursor_dir, "mcp.json")
+
+        # 先读取原有内容
+        if os.path.exists(mcp_json_path):
+            with open(mcp_json_path, "r", encoding="utf-8") as f:
+                try:
+                    data = json.load(f)
+                except Exception:
+                    data = {}
+        else:
+            data = {}
+
+        # 保证mcpServers为dict
+        if "mcpServers" not in data or not isinstance(data["mcpServers"], dict):
+            data["mcpServers"] = {}
+
+        # 替换或新加 code_helper
+        data["mcpServers"]["local_mcps"] = {
+            "command": "python",
+            "args": ["-m", "local_mcps.cli", "main"],
+            "env": {}
+        }
+
+        with open(mcp_json_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
 
     @staticmethod
     def code_helper(transport: Literal['stdio', 'sse', 'streamable-http'] = 'stdio'):
