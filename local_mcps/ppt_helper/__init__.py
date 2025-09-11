@@ -7,13 +7,13 @@ _ppt_helper_by_html_prompt = """
 - 你精通ppt开发，熟悉ppt开发过程
 - 你精通html，熟悉html开发过程
 - 参考模版生成一个PPT的页面
-- 每页ppt高度 height: 720px; 严格准守
+- 每页ppt高度上下全屏; 严格准守，不允许出现左右滚动条，上下滚动条，不允许超出全屏
 - 页面不允许出现滚动条
 - 内容不宜过多，导致撑爆页面
 - ppt布局可以考虑左右和上下都居中
 - 也页面风格清爽
 - 如果有数据，可以考虑使用表格/统计等来展示
-- 多页ppt，则生成多个html，比如slider1.html. slider2.html...，最后使用 index.html 来引用汇总成一个完成ppt
+- 多页ppt，则生成多个html，比如slider_首页.html. slider_目录.html, slider_xxx.html, ...，最后使用 index.html 来引用汇总成一个完成ppt
 
 ## 模版
 
