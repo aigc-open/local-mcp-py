@@ -48,19 +48,19 @@ pip install -e .
 
 ```bash
 # 启动主 MCP 服务器
-python -m mcps.cli main
+python -m local_mcps.cli main
 
 # 启动代码辅助工具服务器
-python -m mcps.cli code_helper
+python -m local_mcps.cli code_helper
 
 # 查看所有可用命令
-python -m mcps.cli --help
+python -m local_mcps.cli --help
 ```
 
 ### 编程方式使用
 
 ```python
-from mcps.cli import MCP
+from local_mcps.cli import MCP
 
 # 方式1: 使用主服务器
 mcp_instance = MCP.main()
@@ -73,7 +73,7 @@ mcp_instance = MCP.code_helper()
 
 ```python
 from mcp.server.fastmcp import FastMCP
-from mcps.code_helper import register_code_helper_tools
+from local_mcps.code_helper import register_code_helper_tools
 
 # 创建自定义 MCP 服务器
 mcp = FastMCP()
@@ -103,11 +103,11 @@ debug_prompt = debug_help_prompt(
 
 ```
 local-mcp-py/
-├── mcps/                    # 主包
+├── local_mcps/                    # 主包
 │   ├── __init__.py         # 包初始化
 │   ├── cli.py              # Fire 命令行接口
 │   ├── code_helper.py      # 代码辅助工具
-│   └── operator.py         # 操作工具（待开发）
+│   └── cpu_operator.py     # CPU操作工具
 ├── setup.py                # 传统打包配置
 ├── pyproject.toml          # 现代打包配置
 ├── MANIFEST.in             # 包含文件配置
@@ -132,16 +132,16 @@ python -m twine check dist/*
 
 ### 添加新模块
 
-1. 在 `mcps/` 目录创建新的模块文件
+1. 在 `local_mcps/` 目录创建新的模块文件
 2. 实现 `register_xxx_tools(mcp)` 函数
 3. 在模块中添加 MCP 工具装饰器 `@mcp.tool()`
-4. 在 `mcps/cli.py` 的 `MCP` 类中添加对应的方法
+4. 在 `local_mcps/cli.py` 的 `MCP` 类中添加对应的方法
 5. 使用 Fire 自动生成命令行接口
 
 ### 开发示例
 
 ```python
-# mcps/your_module.py
+# local_mcps/your_module.py
 from mcp.server.fastmcp import FastMCP
 
 def register_your_tools(mcp: FastMCP):
@@ -152,7 +152,7 @@ def register_your_tools(mcp: FastMCP):
         """工具描述"""
         return f"处理结果: {param}"
 
-# 在 mcps/cli.py 中添加方法
+# 在 local_mcps/cli.py 中添加方法
 class MCP:
     @staticmethod
     def your_module():
@@ -167,12 +167,12 @@ class MCP:
 
 ```bash
 # 直接运行 CLI
-python mcps/cli.py main
-python mcps/cli.py code_helper
+python local_mcps/cli.py main
+python local_mcps/cli.py code_helper
 
 # 使用 Fire 查看帮助
-python mcps/cli.py --help
-python mcps/cli.py main --help
+python local_mcps/cli.py --help
+python local_mcps/cli.py main --help
 ```
 
 ## 📋 依赖
