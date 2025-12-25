@@ -13,6 +13,7 @@ from .draw_helper import register_draw_helper_tools
 from .blog_helper import register_blog_helper_tools
 from .ppt_helper import register_ppt_helper_tools
 from .tender_helper import register_tender_helper_tools
+from .md_to_video_script_helper import register_md_to_video_script_helper_tools
 
 class MCP:
     """MCP服务器"""
@@ -27,6 +28,7 @@ class MCP:
         register_ppt_helper_tools(mcp)
         register_tech_solution_helper_tools(mcp)
         register_tender_helper_tools(mcp)
+        register_md_to_video_script_helper_tools(mcp)
         mcp.run(transport=transport)
         return mcp
     
@@ -108,6 +110,13 @@ class MCP:
     def tender_helper(transport: Literal['stdio', 'sse', 'streamable-http'] = 'stdio'):
         mcp = FastMCP()
         register_tender_helper_tools(mcp)
+        mcp.run(transport=transport)
+        return mcp
+
+    @staticmethod
+    def md_to_video_script_helper(transport: Literal['stdio', 'sse', 'streamable-http'] = 'stdio'):
+        mcp = FastMCP()
+        register_md_to_video_script_helper_tools(mcp)
         mcp.run(transport=transport)
         return mcp
 
