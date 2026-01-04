@@ -14,6 +14,7 @@ from .blog_helper import register_blog_helper_tools
 from .ppt_helper import register_ppt_helper_tools
 from .tender_helper import register_tender_helper_tools
 from .md_to_video_script_helper import register_md_to_video_script_helper_tools
+from .frontend_web_helper import register_frontend_web_helper_tools
 
 class MCP:
     """MCP服务器"""
@@ -29,6 +30,7 @@ class MCP:
         register_tech_solution_helper_tools(mcp)
         register_tender_helper_tools(mcp)
         register_md_to_video_script_helper_tools(mcp)
+        register_frontend_web_helper_tools(mcp)
         mcp.run(transport=transport)
         return mcp
     
@@ -119,7 +121,13 @@ class MCP:
         register_md_to_video_script_helper_tools(mcp)
         mcp.run(transport=transport)
         return mcp
-
+    
+    @staticmethod
+    def frontend_web_helper(transport: Literal['stdio', 'sse', 'streamable-http'] = 'stdio'):
+        mcp = FastMCP()
+        register_frontend_web_helper_tools(mcp)
+        mcp.run(transport=transport)
+        return mcp
 
 if __name__ == "__main__":
     from fire import Fire
