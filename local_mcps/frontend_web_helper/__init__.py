@@ -55,7 +55,6 @@ _frontend_web_create_project_prompt = f"""
 - 项目风格科技感
 - 项目结构清晰，目录设计合理，代码结构清晰，易于维护
 - 布局合理，内容充实，配色搭配得当
-- 项目可能是其他域名下的子域名，比如：https://www.baidu.com/abc，那么项目访问方式可能是：https://www.baidu.com/abc，所以请你注意静态资源的访问方式，不要出现404，当然需要支持可配置
 
 ## 技术栈
 - 前端：React + vite + tailwindcss + shadcn/ui
