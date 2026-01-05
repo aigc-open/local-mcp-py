@@ -224,6 +224,7 @@ _draw_system_flowchart_prompt = """
 - 节点与节点之间逻辑清晰
 - 颜色协调
 - 绘图时使用 drawio 来绘制，最后生成一个 xxx.drawio 文件,命名规范为 xxx_流程图.drawio
+- 注意在 XML 文件中，& 字符是特殊字符，必须转义为 &amp;，否则会导致解析错误。其他需要转义的字符包括：& → &amp; < → &lt; > → &gt;
 
 ## 模版
 ```xml
